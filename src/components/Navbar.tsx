@@ -6,6 +6,7 @@ import {
   Badge,
   Button,
   Dropdown,
+  Loading,
   Navbar as Nav,
   Switch,
   Text,
@@ -43,11 +44,14 @@ const Navbar = () => {
   const segment = useSelectedLayoutSegment();
   const { isDark } = useTheme();
   const { setTheme } = useNextTheme();
+  if (status === "loading") {
+    return <Loading />;
+  }
   // useEffect(() => {
   //   console.log(user);
   // });
   return (
-    <Nav variant="floating" shouldHideOnScroll isCompact>
+    <Nav variant="floating"  isCompact>
       <Nav.Brand>
         <Nav.Toggle
           aria-label="toggle navigation"
@@ -175,12 +179,11 @@ const Navbar = () => {
           </Dropdown>
         ) : (
           <Button
-            icon={<GoogleIcon  />}
+            icon={<GoogleIcon />}
             flat
             color="primary"
             auto
             animated
-           
             onClick={() => signIn("google")}
             css={{
               color: "white",
