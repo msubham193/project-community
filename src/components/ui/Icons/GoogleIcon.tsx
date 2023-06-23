@@ -1,16 +1,8 @@
-export const GoogleIcon = ({
-  fill = "currentColor",
-  filled,
-  size,
-  height,
-  width,
-  label,
-  ...props
-}) => {
+export const GoogleIcon = ({ ...props }) => {
   return (
     <svg
-      width={size || width || 24}
-      height={size || height || 24}
+      width={24}
+      height={24}
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

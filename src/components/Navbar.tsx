@@ -175,11 +175,12 @@ const Navbar = () => {
           </Dropdown>
         ) : (
           <Button
-            icon={<GoogleIcon fill="currentColor" />}
+            icon={<GoogleIcon  />}
             flat
             color="primary"
             auto
             animated
+           
             onClick={() => signIn("google")}
             css={{
               color: "white",
