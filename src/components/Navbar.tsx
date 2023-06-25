@@ -6,16 +6,20 @@ import {
   Badge,
   Button,
   Dropdown,
-  Loading,
+  Input,
   Navbar as Nav,
   Switch,
   Text,
+  theme,
+  Loading as Load,
   useTheme,
 } from "@nextui-org/react";
 import { useSelectedLayoutSegment } from "next/navigation";
 import Link from "next/link";
 import { useTheme as useNextTheme } from "next-themes";
 import { GoogleIcon } from "./ui/Icons/GoogleIcon";
+import Loading from "./Loading";
+import SearchIcon from "./ui/Icons/SearchIcon";
 
 const SunIcon = () => {
   return (
@@ -44,6 +48,8 @@ const Navbar = () => {
   const segment = useSelectedLayoutSegment();
   const { isDark } = useTheme();
   const { setTheme } = useNextTheme();
+
+  const loading = false;
   if (status === "loading") {
     return <Loading />;
   }
@@ -51,7 +57,7 @@ const Navbar = () => {
   //   console.log(user);
   // });
   return (
-    <Nav variant="floating"  isCompact>
+    <Nav variant="floating" isCompact isBordered>
       <Nav.Brand>
         <Nav.Toggle
           aria-label="toggle navigation"
@@ -86,16 +92,14 @@ const Navbar = () => {
         </Text>
       </Nav.Brand>
       <Nav.Content hideIn="xs">
-        <Nav.Item isActive={segment === null}>
-          <Link style={{ color: "inherit" }} href="/">
-            Feed
-          </Link>
-        </Nav.Item>
-        <Nav.Item isActive={segment === "foryou"}>
-          <Link style={{ color: "inherit" }} href="/foryou">
-            Foryou
-          </Link>
-        </Nav.Item>
+        
+        <Input
+          placeholder="Search..."
+          css={{ bgBlur: "$accents0" }}
+          contentRight={
+            loading ? <Load size="xs" /> : <SearchIcon width={24} height={24} />
+          }
+        />
       </Nav.Content>
       <Nav.Content>
         <Nav.Collapse>
@@ -122,6 +126,19 @@ const Navbar = () => {
             >
               Foryou
             </Link>
+          </Nav.CollapseItem>
+          <Nav.CollapseItem>
+            <div
+              style={{
+                minWidth: "100%",
+                color: "inherit",
+                cursor: "pointer",
+                fontWeight: segment === "foryou" ? "bold" : "normal",
+              }}
+              onClick={() => signIn("google")}
+            >
+              Login
+            </div>
           </Nav.CollapseItem>
         </Nav.Collapse>
         <Switch

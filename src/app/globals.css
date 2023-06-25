@@ -1,0 +1,8 @@
+.nextui-button-text {
+    z-index: 0 !important;
+  }
+  .gradient-border {
+    border: 10px solid transparent;
+    border-image: linear-gradient(to right, #ff0000, #00ff00) 1;
+    border-image-slice: 10;
+  }

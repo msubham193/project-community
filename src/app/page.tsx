@@ -1,34 +1,47 @@
 "use client";
 import Image from "next/image";
 import styles from "./page.module.css";
-import { Button, Card, Grid, Loading, Text } from "@nextui-org/react";
+import { Button, Card, Container, Grid, Navbar, Text } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
+import CustomFeed from "@/components/Feed/CustomFeed";
+import GeneralFeed from "@/components/Feed/GeneralFeed";
+import Loading from "@/components/Loading";
+import Link from "next/link";
+import Pagenav from "@/components/PageNav/Pagenav";
+import CommunityCard from "@/components/Community/CommunityCard";
 
 export default function Home() {
   const { data: session, status } = useSession();
 
-  console.log(status);
+  if (status == "loading") return <Loading />;
 
   const MockItem = ({ text }: { text: string }) => {
-    return (
-      <Card css={{ h: "$20", $$cardColor: "$colors$primary" }}>
-        <Card.Body>
-          <Text h6 size={15} color="white" css={{ m: 0 }}>
-            {text}
-          </Text>
-        </Card.Body>
-      </Card>
-    );
+    return "hjvvh";
   };
 
   return (
-    <Grid.Container gap={2} justify="center">
-      <Grid xs={8}>
-        <MockItem text="1 of 2" />
-      </Grid>
-      <Grid xs={4}>
-        <MockItem text="2 of 2" />
-      </Grid>
-    </Grid.Container>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        padding: "1rem",
+        justifyContent: "flex-end",
+        alignItems: "center",
+      }}
+    >
+      <Pagenav />
+      <Grid.Container
+        gap={1}
+        justify="center"
+        css={{ minHeight: "100vh", padding: "1rem" }}
+      >
+        <Grid xs={8} css={{ background: "" }}>
+          {status == "authenticated" ? <CustomFeed /> : <GeneralFeed />}
+        </Grid>
+        <Grid xs={4}>
+          <CommunityCard />
+        </Grid>
+      </Grid.Container>
+    </div>
   );
 }

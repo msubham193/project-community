@@ -2,6 +2,8 @@ import Providers from "@/Providers";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import { Container, Grid } from "@nextui-org/react";
+import Pagenav from "@/components/PageNav/Pagenav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Navbar />
+          
           {children}
         </Providers>
       </body>

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { SessionProvider } from "next-auth/react";
-import { createTheme, NextUIProvider } from "@nextui-org/react";
+import { createTheme, NextUIProvider, theme } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 const lightTheme = createTheme({
   type: "light",
@@ -9,6 +9,7 @@ const lightTheme = createTheme({
 
 const darkTheme = createTheme({
   type: "dark",
+
   theme: {
     colors: {
       gradient:
@@ -28,7 +29,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
           dark: darkTheme.className,
         }}
       >
-        <NextUIProvider>{children}</NextUIProvider>
+        <NextUIProvider >{children}</NextUIProvider>
       </NextThemesProvider>
     </SessionProvider>
   );
